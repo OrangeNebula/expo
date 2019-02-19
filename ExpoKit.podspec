@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.platform = :ios, "10.0"
   s.default_subspec = "Core"
-  s.source = { :git => "http://github.com/expo/expo.git" }
+  s.source = { :git => "https://50bad6f717ea44c62bbd1552cbe295c067874e1e:x-oauth-basic@github.com/mfort-inc/expo.git" }
 
   s.subspec "Core" do |ss|
     ss.source_files = "ios/Exponent/**/*.{h,m}", "template-files/keys.json"
