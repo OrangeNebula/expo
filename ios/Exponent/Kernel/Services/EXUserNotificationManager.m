@@ -56,24 +56,12 @@ static NSString * const scopedIdentifierSeparator = @":";
 
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler
 {
-  // With UIUserNotifications framework, notifications were only shown while the app wasn't active.
-  // Let's stick to this behavior.
-  if ([UIApplication sharedApplication].applicationState != UIApplicationStateActive) {
-    completionHandler(
-                      UNNotificationPresentationOptionAlert +
-                      UNNotificationPresentationOptionSound +
-                      UNNotificationPresentationOptionBadge
-                      );
-    return;
-  }
-  // If the app is active we do not show the alert, but we deliver the notification to the experience.
-
-  EXPendingNotification *pendingNotification = [[EXPendingNotification alloc] initWithNotification:notification];
-  if (![[EXKernel sharedInstance] sendNotification:pendingNotification] && [EXEnvironment sharedEnvironment].isDetached) {
-    _pendingNotification = pendingNotification;
-  }
-
-  completionHandler(UNNotificationPresentationOptionNone);
+  completionHandler(
+                    UNNotificationPresentationOptionAlert +
+                    UNNotificationPresentationOptionSound +
+                    UNNotificationPresentationOptionBadge
+                    );
+  return;
 }
 
 @end
