@@ -38,9 +38,6 @@ android {
     versionName '2.11.4'
     // END VERSIONS
     ndk {
-      // We use different `abiFilters` for distributing
-      // to be able to bundle old, incompatible SDKs.
-
       // WHEN_DISTRIBUTING_REMOVE_FROM_HERE
       abiFilters 'armeabi-v7a', 'x86'
       // WHEN_DISTRIBUTING_REMOVE_TO_HERE
@@ -203,10 +200,6 @@ dependencies {
   // ADD_NEW_SDKS_HERE
 
 
-  // BEGIN_SDK_34
-  implementation(project(':expoview-abi34_0_0'))
-  // END_SDK_34
-
   // BEGIN_SDK_33
   implementation(project(':expoview-abi33_0_0'))
   // END_SDK_33
@@ -238,7 +231,12 @@ dependencies {
         '../enabled-modules'
       ],
       configuration: 'api',
-      target       : 'react-native'
+      target       : 'react-native',
+      exclude      : [
+        'unimodules-face-detector-interface',
+        'expo-face-detector',
+        'expo-payments-stripe'
+      ]
   ])
   END UNCOMMENT WHEN DISTRIBUTING */
   // WHEN_DETACHING_REMOVE_TO_HERE
@@ -251,9 +249,12 @@ dependencies {
       configuration: 'api',
       target       : 'react-native',
       exclude      : [
-        // You can exclude unneeded modules here, eg.
-        // 'unimodules-face-detector-interface',
-        // 'expo-face-detector'
+        // You can exclude unneeded modules here.
+        // By default we exclude FaceDetector
+        // and Stripe payments APIs.
+        'unimodules-face-detector-interface',
+        'expo-face-detector',
+        'expo-payments-stripe'
 
         // Adding a name here will also remove the package
         // from auto-generated BasePackageList.java

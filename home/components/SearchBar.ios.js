@@ -13,7 +13,7 @@ import {
 import { withNavigation, withNavigationFocus } from 'react-navigation';
 
 import Layout from '../constants/Layout';
-import * as Kernel from '../kernel/Kernel';
+import ExponentKernel from '../universal/ExponentKernel';
 
 const SearchContainerHorizontalMargin = 10;
 const SearchContainerWidth = Layout.window.width - SearchContainerHorizontalMargin * 2;
@@ -125,8 +125,8 @@ export default class SearchBar extends React.Component {
 
   _handleSubmit = () => {
     let { text } = this.state;
-    if (text.toLowerCase() === '^dev menu' || text.toLowerCase() === '^dm') {
-      Kernel.addDevMenu();
+    if (ExponentKernel && (text.toLowerCase() === '^dev menu' || text.toLowerCase() === '^dm')) {
+      ExponentKernel.addDevMenu();
     } else {
       this._textInput.blur();
     }

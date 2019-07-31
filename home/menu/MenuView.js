@@ -20,6 +20,7 @@ import {
 import DevIndicator from '../components/DevIndicator';
 import * as Kernel from '../kernel/Kernel';
 import FriendlyUrls from '../legacy/FriendlyUrls';
+import ExponentKernel from '../universal/ExponentKernel';
 import requestCameraPermissionsAsync from '../utils/requestCameraPermissionsAsync';
 
 let MENU_NARROW_SCREEN = Dimensions.get('window').width < 375;

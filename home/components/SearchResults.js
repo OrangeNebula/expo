@@ -18,8 +18,9 @@ import ProfileCard from '../components/ProfileCard';
 import ProjectCard from '../components/ProjectCard';
 import Colors from '../constants/Colors';
 import SharedStyles from '../constants/SharedStyles';
-import * as Kernel from '../kernel/Kernel';
+import ExponentKernel from '../universal/ExponentKernel';
 import UrlUtils from '../utils/UrlUtils';
+
 
 const SectionIds = ['UserSearchResult', 'AppSearchResult'];
 
@@ -145,7 +146,17 @@ export default class SearchResults extends React.Component {
   _handleOpenUrl = () => {
     Keyboard.dismiss();
     let url = UrlUtils.normalizeUrl(this.props.query);
-    Kernel.openURLAsync(url);
+    if (ExponentKernel && ExponentKernel.openURL) {
+      // ExponentKernel.openURL exists on iOS, and it's the same as Linking.openURL
+      // except it will never validate whether Exponent can open this url.
+      // this addresses cases where, e.g., someone types in a http://localhost url directly into
+      // the URL bar. we know they implicitly expect Exponent to open this, even though
+      // it won't validate as an Exponent url.
+      // By contrast, Linking.openURL would pass such a URL on to the system url handler.
+      ExponentKernel.openURL(url);
+    } else {
+      Linking.openURL(url);
+    }
   };
 
   _renderSectionHeader = (sectionData: Object, sectionId: string) => {
@@ -179,6 +190,8 @@ export default class SearchResults extends React.Component {
       return (
         <ProjectCard
           style={{ marginBottom: this._isLastAppSearchResult(rowId) ? 0 : 15 }}
+          isLikedByMe={app.isLikedByMe}
+          likeCount={app.likeCount}
           id={app.id}
           iconUrl={app.iconUrl}
           projectName={app.name}

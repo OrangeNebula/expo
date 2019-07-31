@@ -25,11 +25,14 @@ import onlyIfAuthenticated from '../utils/onlyIfAuthenticated';
 @connect((data, props) => ProfileScreen.getDataProps(data, props))
 export default class ProfileScreen extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: navigation.getParam('username', 'Profile'),
+    headerTransparent: true,
+    headerBackTitleVisible: false,
+    headerStyle: { borderBottomWidth: 0 },
+    headerTintColor: '#4E9BDE',
     headerRight: navigation.getParam('username') ? (
       <OptionsButton />
     ) : (
-      Platform.select({ ios: <UserSettingsButtonIOS />, default: <SignOutButtonAndroid /> })
+      Platform.select({ ios: null, default: <SignOutButtonAndroid /> })
     ),
   });
 
@@ -38,6 +41,7 @@ export default class ProfileScreen extends React.Component {
 
     return {
       isAuthenticated,
+      image: data.profile.image,
       username: props.navigation.getParam('username'),
     };
   }
@@ -57,19 +61,15 @@ export default class ProfileScreen extends React.Component {
       return;
     }
 
-    if (!this.props.isAuthenticated) {
-      this.setState({ isOwnProfile: false });
-    } else {
-      getViewerUsernameAsync().then(
-        username => {
-          this.setState({ isOwnProfile: username === this.props.username });
-        },
-        error => {
-          this.setState({ isOwnProfile: false });
-          console.warn(`There was an error fetching the viewer's username`, error);
-        }
-      );
-    }
+    getViewerUsernameAsync().then(
+      username => {
+        this.setState({ isOwnProfile: username === this.props.username });
+      },
+      error => {
+        this.setState({ isOwnProfile: false });
+        console.warn(`There was an error fetching the viewer's username`, error);
+      }
+    );
   }
 
   render() {

@@ -1,19 +1,21 @@
 import { DeviceEventEmitter } from 'react-native';
 
-import * as Kernel from '../kernel/Kernel';
+import ExponentKernel from '../universal/ExponentKernel';
 
 const addListenerWithNativeCallback = (eventName, eventListener) => {
-  DeviceEventEmitter.addListener(eventName, async event => {
-    try {
-      let result = await eventListener(event);
-      if (!result) {
-        result = {};
+  if (ExponentKernel) {
+    DeviceEventEmitter.addListener(eventName, async event => {
+      try {
+        let result = await eventListener(event);
+        if (!result) {
+          result = {};
+        }
+        ExponentKernel.onEventSuccess(event.eventId, result);
+      } catch (e) {
+        ExponentKernel.onEventFailure(event.eventId, e.message);
       }
-      Kernel.onEventSuccess(event.eventId, result);
-    } catch (e) {
-      Kernel.onEventFailure(event.eventId, e.message);
-    }
-  });
+    });
+  }
 };
 
 export default addListenerWithNativeCallback;

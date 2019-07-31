@@ -1,11 +1,10 @@
 /* @flow */
-
 import React from 'react';
-import { NativeModules, StyleSheet, TextInput, View } from 'react-native';
+import { StyleSheet, Platform, TextInput, View } from 'react-native';
 import { HeaderBackButton, withNavigation, withNavigationFocus } from 'react-navigation';
 
 import Colors from '../constants/Colors';
-import * as Kernel from '../kernel/Kernel';
+import ExponentKernel from '../universal/ExponentKernel';
 
 @withNavigation
 @withNavigationFocus
@@ -55,8 +54,8 @@ export default class SearchBar extends React.Component {
 
   _handleSubmit = () => {
     let { text } = this.state;
-    if (text.toLowerCase() === '^dev menu' || text.toLowerCase() === '^dm') {
-      Kernel.addDevMenu();
+    if (ExponentKernel && (text.toLowerCase() === '^dev menu' || text.toLowerCase() === '^dm')) {
+      ExponentKernel.addDevMenu();
     } else {
       this._textInput.blur();
     }
@@ -74,6 +73,12 @@ const styles = StyleSheet.create({
     marginBottom: 2,
     paddingLeft: 5,
     marginRight: 5,
+    ...Platform.select({
+      default: {},
+      web: {
+        outlineWidth: 0,
+      },
+    }),
   },
   searchInputPlaceholderText: {},
 });
