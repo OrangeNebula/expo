@@ -16,4 +16,26 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+NS_SWIFT_NAME(DeviceDialogViewDelegate)
+@protocol FBSDKDeviceDialogViewDelegate;
+
+// internal class, APIs are subject to change.
+NS_SWIFT_NAME(FBDeviceDialogView)
+@interface FBSDKDeviceDialogView : UIView
+
+@property (nonatomic, weak) id<FBSDKDeviceDialogViewDelegate> delegate;
+@property (nonatomic, copy) NSString *confirmationCode;
+
+// override point for subclasses.
+- (void)buildView;
+
+@end
+
+NS_SWIFT_NAME(DeviceDialogViewDelegate)
+@protocol FBSDKDeviceDialogViewDelegate <NSObject>
+
+- (void)deviceDialogViewDidCancel:(FBSDKDeviceDialogView *)deviceDialogView;
+
+@end

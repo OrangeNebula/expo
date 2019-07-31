@@ -16,26 +16,17 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import "FBSDKAppLinkTarget.h"
+#import <UIKit/UIKit.h>
 
-@interface FBSDKAppLinkTarget ()
+NS_ASSUME_NONNULL_BEGIN
 
-@property (nonatomic, strong) NSURL *URL;
-@property (nonatomic, copy) NSString *appStoreId;
-@property (nonatomic, copy) NSString *appName;
+/*
+  An internal base class for device related flows.
 
+ This is an internal API that should not be used directly and is subject to change.
+*/
+NS_SWIFT_NAME(FBDeviceViewControllerBase)
+@interface FBSDKDeviceViewControllerBase : UIViewController
 @end
 
-@implementation FBSDKAppLinkTarget
-
-+ (instancetype)appLinkTargetWithURL:(NSURL *)url
-                          appStoreId:(NSString *)appStoreId
-                             appName:(NSString *)appName {
-    FBSDKAppLinkTarget *target = [[self alloc] init];
-    target.URL = url;
-    target.appStoreId = appStoreId;
-    target.appName = appName;
-    return target;
-}
-
-@end
+NS_ASSUME_NONNULL_END

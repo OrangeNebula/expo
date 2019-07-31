@@ -16,22 +16,19 @@
 // IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
-#import "FBSDKAppLinkResolving.h"
+#import <FBSDKCoreKit/FBSDKButton.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-/*!
- A reference implementation for an App Link resolver that uses a hidden UIWebView
- to parse the HTML containing App Link metadata.
- */
-@interface FBSDKWebViewAppLinkResolver : NSObject <FBSDKAppLinkResolving>
+/*
+  An internal base class for device related flows.
 
-/*!
- Gets the instance of a FBSDKWebViewAppLinkResolver.
+ This is an internal API that should not be used directly and is subject to change.
  */
-+ (instancetype)sharedInstance;
+NS_SWIFT_NAME(FBDeviceButton)
+@interface FBSDKDeviceButton : FBSDKButton
 
 @end
 
