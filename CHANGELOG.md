@@ -51,7 +51,8 @@ This is the log of notable changes to the Expo client that are developer-facing.
 - added support for overriding MIME type in `IntentLauncherAndroid.startActivityAsync` for Android by [@rhunt4675](https://github.com/rhunt4675) ([#3300](https://github.com/expo/expo/pull/3300))
 - added `Location.enableNetworkProviderAsync` method to ask the user to turn on high accuracy location services by [@tsapeta](https://github.com/tsapeta) ([#3273](https://github.com/expo/expo/pull/3273))
 - upgraded Facebook Audience Network SDK dependency to 5.1.1 (iOS) by [@sjchmiela](https://github.com/sjchmiela) ([#3394](https://github.com/expo/expo/pull/3394))
-- upgraded Facebook Core- and LoginKit dependency to 4.40.0 by [@sjchmiela](https://github.com/sjchmiela) ([#3394](https://github.com/expo/expo/pull/3394))
+- upgraded Facebook Core- and LoginKit dependency to 
+4.40.0 by [@sjchmiela](https://github.com/sjchmiela) ([#3394](https://github.com/expo/expo/pull/3394))
 - upgraded Facebook SDK dependency to 5.0.1 (Android) by [@sjchmiela](https://github.com/sjchmiela)
 - upgraded `react-native-webview` to `5.8.1` by [@sjchmiela](https://github.com/sjchmiela) ([#4146](https://github.com/expo/expo/pull/4146))
 - added Firebase integration to `expo-analytics-segment` by [@sjchmiela](https://github.com/sjchmiela) ([#3615](https://github.com/expo/expo/pull/3615))
